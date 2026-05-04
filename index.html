@@ -8,7 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+            -webkit-tap-highlight-color: transparent; /* Menghilangkan highlight biru/abu saat ditap di mobile */
+        }
         
         body {
             min-height: 100vh;
@@ -98,6 +104,7 @@
             background: transparent; border: none; color: rgba(255,255,255,0.6);
             padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 0.95rem;
             cursor: pointer; transition: all 0.4s cubic-bezier(0.2,0.8,0.2,1);
+            display: flex; align-items: center; gap: 8px; /* Menyelaraskan icon & text */
         }
         .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
         .nav-btn.active {
@@ -165,7 +172,8 @@
             display: flex; align-items: center; justify-content: space-between;
             margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
         }
-        .gallery-title { font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.8); }
+        .gallery-title { font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 8px; }
+        .gallery-title i { color: #ff6a00; }
         .gallery-count {
             font-size: 0.72rem; background: rgba(255,255,255,0.07);
             border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
@@ -240,7 +248,7 @@
             .roblox-mega { width: 150px; height: 150px; }
             header { flex-direction: column; gap: 20px; }
             nav { width: 100%; justify-content: center; }
-            .nav-btn { flex: 1; padding: 10px; font-size: 0.85rem; text-align: center; }
+            .nav-btn { flex: 1; padding: 10px; font-size: 0.85rem; text-align: center; justify-content: center; }
         }
         @media (max-width: 600px) {
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -262,13 +270,12 @@
                 <div class="brand-name">BOROS</div>
             </div>
             <nav>
-                <button class="nav-btn active" data-tab="home">Home</button>
-                <button class="nav-btn" data-tab="about">About</button>
-                <button class="nav-btn" data-tab="gallery">Gallery</button>
+                <button class="nav-btn active" data-tab="home"><i class="fa-solid fa-house"></i> Home</button>
+                <button class="nav-btn" data-tab="about"><i class="fa-solid fa-circle-info"></i> About</button>
+                <button class="nav-btn" data-tab="gallery"><i class="fa-solid fa-images"></i> Gallery</button>
             </nav>
         </header>
 
-        <!-- HOME -->
         <div id="home" class="tab-content active">
             <div class="home-wrapper">
                 <div class="hero-left">
@@ -284,7 +291,6 @@
             </div>
         </div>
 
-        <!-- ABOUT -->
         <div id="about" class="tab-content">
             <div class="about-card">
                 <div class="about-title">
@@ -308,10 +314,9 @@
             </div>
         </div>
 
-        <!-- GALLERY -->
         <div id="gallery" class="tab-content">
             <div class="gallery-header">
-                <div class="gallery-title">Galeri Komunitas</div>
+                <div class="gallery-title"><i class="fa-solid fa-images"></i> Galeri Komunitas</div>
                 <div class="gallery-count">Total: <span id="totalCount">—</span> foto</div>
             </div>
             <div class="gallery-grid" id="galleryGrid">
@@ -323,7 +328,6 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX -->
     <div class="lightbox-overlay" id="lightbox">
         <div class="lightbox-close" id="lightboxClose"><i class="fa-solid fa-xmark"></i></div>
         <div class="lightbox-content">
@@ -384,8 +388,6 @@
         });
 
         // ── GALLERY LOADER ─────────────────────────────────────────────
-        // Membaca img.json yang dihasilkan otomatis oleh GitHub Actions
-        // Format img.json: { "images": [ { "filename", "url", "uploaded_by", "timestamp", ... } ] }
         const grid = document.getElementById('galleryGrid');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImage');
@@ -399,13 +401,10 @@
                 if (!res.ok) throw new Error('img.json tidak ditemukan');
                 const data = await res.json();
 
-                // Support 2 format: array of URLs (lama) atau object {images:[...]} (baru)
                 let images = [];
                 if (Array.isArray(data)) {
-                    // Format lama: ["url1","url2",...]
                     images = data.map(url => ({ url, filename: url.split('/').pop(), uploaded_by: null, timestamp: null }));
                 } else if (data.images) {
-                    // Format baru dari sistem GitHub Actions
                     images = data.images;
                 }
 
@@ -421,7 +420,6 @@
                     return;
                 }
 
-                // Urutkan terbaru dulu
                 images.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
 
                 grid.innerHTML = '';
@@ -478,7 +476,6 @@
         }
 
         loadGallery();
-        // Auto-refresh setiap 5 menit (sama dengan interval GitHub Actions)
         setInterval(loadGallery, 5 * 60 * 1000);
 
         // ── LIGHTBOX ───────────────────────────────────────────────────
