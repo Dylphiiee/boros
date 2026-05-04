@@ -2,20 +2,18 @@ name: Boros Gallery Sync
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/1 * * * *"
   workflow_dispatch:
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   sync-gallery:
+    name: Sync Gambar dari Discord
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -25,7 +23,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
       - name: Install Dependencies
         run: pip install requests discord.py
@@ -36,25 +33,25 @@ jobs:
           CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
         run: python scripts/discord_scan.py
 
-      - name: Process Images
+      - name: Download & Proses Gambar
         run: python scripts/process_images.py
 
-      - name: Check Changes
+      - name: Cek Perubahan
         id: check
         run: |
-          if git status --porcelain | grep -q .; then
+          if [[ -n "$(git status --porcelain)" ]]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
           else
             echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit and Push
+      - name: Commit & Push
         if: steps.check.outputs.has_changes == 'true'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Boros Gallery Bot"
+          git config user.email "boros-bot@users.noreply.github.com"
           git add images/ img.json cdn_links.json
-          COUNT=$(git diff --cached --name-only | grep "^images/" | wc -l || echo 0)
-          git commit -m "ci: sync ${COUNT} new image(s) from Discord [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-          git pull --rebase origin main
+          COUNT=$(git diff --cached --name-only | grep "^images/" | wc -l)
+          git commit -m "Tambah ${COUNT} gambar baru [$(date -u '+%Y-%m-%d %H:%M UTC')]"
           git push origin main
+          echo "Push berhasil!"
