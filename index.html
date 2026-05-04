@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boros - Roblox Community</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -16,636 +16,243 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: #0a0a0a;
+            background: #08080c;
             overflow-x: hidden;
             overflow-y: auto;
-            -webkit-tap-highlight-color: transparent;
-            tap-highlight-color: transparent;
         }
 
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: linear-gradient(-45deg, #1a0a0a, #0d0d2b, #2a0a1a, #1a0a0a);
-            background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
+        .animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: #050505; }
+
+        .glass-orb {
+            position: fixed; border-radius: 50%; filter: blur(90px); z-index: 1; opacity: 0.6;
+            animation: floatOrb 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .orb-1 { width: 400px; height: 400px; background: #ff4500; top: -10%; left: 10%; }
+        .orb-2 { width: 500px; height: 500px; background: #5865F2; bottom: -20%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 300px; height: 300px; background: #8a2be2; top: 40%; left: 40%; animation-delay: -10s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 80px) scale(1.2); }
+            100% { transform: translate(-50px, 50px) scale(0.8); }
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            25% { background-position: 50% 0%; }
-            50% { background-position: 100% 50%; }
-            75% { background-position: 50% 100%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
 
         .app-container {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 1000px;
-            min-height: 500px;
-            background: rgba(15, 15, 25, 0.35);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 30px;
-            padding: 35px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.9);
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: scale(0.95);
-            animation: containerAppear 0.8s ease forwards;
+            position: relative; z-index: 3; width: 100%; max-width: 1050px; min-height: 550px;
+            background: rgba(255,255,255,0.03); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.15);
+            border-left: 1px solid rgba(255,255,255,0.15);
+            border-radius: 32px; padding: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.02);
+            display: flex; flex-direction: column; opacity: 0; transform: scale(0.95);
+            animation: containerAppear 1s cubic-bezier(0.2,0.8,0.2,1) forwards;
         }
 
         @keyframes containerAppear {
-            0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+            0% { opacity: 0; transform: scale(0.9) translateY(30px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-            opacity: 0;
-            animation: slideInLeft 0.6s ease 0.2s forwards;
-            flex-shrink: 0;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 30px; flex-wrap: wrap; gap: 20px;
+            opacity: 0; animation: slideInLeft 0.8s cubic-bezier(0.2,0.8,0.2,1) 0.2s forwards; flex-shrink: 0;
         }
 
-        @keyframes slideInLeft {
-            0% { opacity: 0; transform: translateX(-30px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes slideInLeft { 0% { opacity:0; transform:translateX(-30px); } 100% { opacity:1; transform:translateX(0); } }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
 
         .logo-icon {
-            font-size: 2.5rem;
-            color: #ffffff;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
-            animation: pulseIcon 3s ease-in-out infinite;
+            font-size: 2.8rem; color: rgba(255,255,255,0.9);
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+            animation: pulseIcon 4s ease-in-out infinite;
         }
 
         @keyframes pulseIcon {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.05) rotate(2deg); }
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.05) translateY(-3px); }
         }
 
         .brand-name {
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ffffff 40%, #ff4500 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2rem; font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 20%, #ff6a00 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             letter-spacing: -1px;
-            animation: textShimmer 4s ease-in-out infinite;
-        }
-
-        @keyframes textShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
 
         nav {
-            display: flex;
-            gap: 5px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 4px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.1);
-            opacity: 0;
-            animation: slideInRight 0.6s ease 0.3s forwards;
-            flex-shrink: 0;
+            display: flex; gap: 8px; background: rgba(0,0,0,0.2); backdrop-filter: blur(20px);
+            padding: 6px; border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.08); border-top: 1px solid rgba(255,255,255,0.15);
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.3);
+            opacity: 0; animation: slideInRight 0.8s cubic-bezier(0.2,0.8,0.2,1) 0.3s forwards;
         }
 
-        @keyframes slideInRight {
-            0% { opacity: 0; transform: translateX(30px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes slideInRight { 0% { opacity:0; transform:translateX(30px); } 100% { opacity:1; transform:translateX(0); } }
 
         .nav-btn {
-            background: transparent;
-            border: none;
-            color: #b0b0b0;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            -webkit-tap-highlight-color: transparent;
-            tap-highlight-color: transparent;
-            position: relative;
+            background: transparent; border: none; color: rgba(255,255,255,0.6);
+            padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.4s cubic-bezier(0.2,0.8,0.2,1);
+        }
+        .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .nav-btn.active {
+            background: rgba(255,255,255,0.1); color: #fff; font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .nav-btn:hover { color: #ffffff; transform: translateY(-2px); }
-        .nav-btn.active { 
-            background: rgba(255,255,255,0.15);
-            color: #ffffff; 
-            font-weight: 700;
-            animation: tabPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes tabPop {
-            0% { transform: scale(0.9); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .tab-content {
-            display: none;
-            flex: 1;
-            min-height: 0;
-        }
+        .tab-content { display: none; flex: 1; min-height: 0; }
         .tab-content.active {
             display: block;
-            animation: tabTransition 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: tabTransition 0.6s cubic-bezier(0.2,0.8,0.2,1) forwards;
         }
 
         @keyframes tabTransition {
-            0% { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(5px); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+            0% { opacity:0; transform:translateY(20px); filter:blur(10px); }
+            100% { opacity:1; transform:translateY(0); filter:blur(0); }
         }
 
-        .home-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            min-height: 300px;
-            align-items: center;
-        }
-
-        .hero-left {
-            text-align: left;
-            opacity: 0;
-            animation: fadeStagger 0.8s ease 0.4s forwards;
-        }
-
-        @keyframes fadeStagger {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-left h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 10px;
-            color: #ffffff;
-            text-shadow: 0 0 40px rgba(255,255,255,0.05);
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 20px rgba(255,255,255,0.05); }
-            50% { text-shadow: 0 0 40px rgba(255,255,255,0.1), 0 0 60px rgba(255,69,0,0.1); }
-        }
-
-        .hero-left h1 span { 
-            color: #ff4500; 
-            text-shadow: 0 0 30px rgba(255, 69, 0, 0.4);
-            animation: textPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes textPulse {
-            0%, 100% { text-shadow: 0 0 30px rgba(255, 69, 0, 0.4); }
-            50% { text-shadow: 0 0 60px rgba(255, 69, 0, 0.6), 0 0 80px rgba(255, 69, 0, 0.3); }
-        }
-
-        .hero-left p {
-            color: #d0d0d0;
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 300px;
-            line-height: 1.6;
-        }
+        /* HOME */
+        .home-wrapper { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; min-height: 350px; align-items: center; }
+        .hero-left h1 { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 15px; color: #fff; letter-spacing: -2px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .hero-left h1 span { background: linear-gradient(135deg, #ff4500, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-left p { color: rgba(255,255,255,0.8); font-size: 1.15rem; margin-bottom: 35px; max-width: 90%; line-height: 1.6; }
 
         .btn-utama {
-            background: linear-gradient(135deg, #5865F2, #4752c4);
-            color: #fff;
-            border: none;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.4);
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, rgba(88,101,242,0.8), rgba(71,82,196,0.9));
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.4);
+            border-top: 1px solid rgba(255,255,255,0.6); color: #fff;
+            padding: 18px 45px; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 12px;
+            transition: all 0.4s cubic-bezier(0.2,0.8,0.2,1); box-shadow: 0 12px 30px rgba(88,101,242,0.4);
+        }
+        .btn-utama:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(88,101,242,1), rgba(71,82,196,1));
+            box-shadow: 0 20px 40px rgba(88,101,242,0.6), 0 0 20px rgba(255,255,255,0.3);
         }
 
-        .btn-utama::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            transition: 0.6s;
-        }
-
-        .btn-utama:hover::before { left: 100%; }
-        .btn-utama:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 40px rgba(88, 101, 242, 0.5); }
-        .btn-utama:active { transform: scale(0.95); }
-
-        .hero-right {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            animation: fadeStagger 0.8s ease 0.6s forwards;
-        }
-
+        .hero-right { display: flex; justify-content: center; align-items: center; }
         .roblox-mega {
-            width: 180px;
-            height: 180px;
-            animation: float 4s ease-in-out infinite;
-            pointer-events: none;
-            filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
+            width: 220px; height: 220px; animation: floatHero 6s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)) drop-shadow(0 0 30px rgba(255,255,255,0.1));
         }
+        @keyframes floatHero { 0%,100% { transform:translateY(0) rotate(0); } 50% { transform:translateY(-25px) rotate(4deg); } }
 
-        @keyframes float { 
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); } 
-            50% { transform: translateY(-20px) rotate(3deg) scale(1.02); } 
-        }
-
-        .float-icon {
-            position: absolute;
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.08);
-            animation: floatIcon 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-        .float-icon:nth-child(2) { top: 5%; left: 5%; animation-delay: 1s; }
-        .float-icon:nth-child(3) { bottom: 5%; right: 5%; animation-delay: 2s; }
-
-        @keyframes floatIcon { 
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.08; } 
-            50% { transform: translateY(-15px) rotate(5deg) scale(1.1); opacity: 0.15; } 
-        }
-
+        /* ABOUT */
         .about-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 35px;
-            opacity: 0;
-            animation: fadeStagger 0.8s ease 0.3s forwards;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+            background: rgba(0,0,0,0.2); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.15);
+            border-left: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px; padding: 40px; display: flex; flex-direction: column;
         }
+        .about-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; color: #fff; }
+        .about-title i { color: #ff6a00; filter: drop-shadow(0 0 10px rgba(255,106,0,0.4)); }
+        .about-desc { color: rgba(255,255,255,0.8); line-height: 1.8; font-size: 1.05rem; max-height: 350px; overflow-y: auto; padding-right: 15px; }
+        .about-desc strong { color: #fff; font-weight: 700; }
+        .about-desc em { color: #ff8c00; }
+        .about-desc::-webkit-scrollbar { width: 6px; }
+        .about-desc::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        .about-desc::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 10px; }
 
-        .about-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #ffffff;
+        /* GALLERY */
+        .gallery-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
         }
-        .about-title i { color: #ff4500; animation: rotateIcon 4s linear infinite; }
-
-        @keyframes rotateIcon {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            75% { transform: rotate(-10deg); }
-            100% { transform: rotate(0deg); }
+        .gallery-title { font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.8); }
+        .gallery-count {
+            font-size: 0.72rem; background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+            padding: 4px 12px; color: rgba(255,255,255,0.5);
         }
+        .gallery-count span { color: #ff8c00; font-weight: 700; }
 
-        .about-desc {
-            color: #d0d0d0;
-            line-height: 1.8;
-            font-size: 1rem;
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 10px;
-            margin-bottom: 0;
-            flex: 1;
-        }
-
-        .about-desc strong { color: #ffffff; }
-        .about-desc em { color: #ff6a00; }
-
-        .about-desc::-webkit-scrollbar { width: 4px; }
-        .about-desc::-webkit-scrollbar-thumb { background: #ff4500; border-radius: 10px; }
-        .about-desc::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
-
-        .stalk-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            opacity: 0;
-            animation: fadeStagger 0.8s ease 0.3s forwards;
-        }
-
-        .stalk-search-area {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .stalk-search-area input {
-            flex: 1;
-            min-width: 150px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .stalk-search-area input:focus { border-color: #ff4500; }
-        .stalk-search-area input::placeholder { color: #666; }
-
-        .stalk-search-btn {
-            background: #ff4500;
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-
-        .stalk-search-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 69, 0, 0.3); }
-
-        .stalk-status {
-            color: #888;
-            font-size: 0.85rem;
-            margin-top: 5px;
-        }
-
-        .stalk-result {
-            display: none;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 10px;
-        }
-
-        .stalk-result.active { display: flex; }
-
-        .stalk-profile {
-            display: flex;
-            gap: 25px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .stalk-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            flex-shrink: 0;
-        }
-
-        .stalk-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-        .stalk-info {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .stalk-info-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stalk-info-item:last-child { border-bottom: none; }
-
-        .stalk-label {
-            color: #888;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .stalk-value {
-            color: #fff;
-            font-size: 0.9rem;
-            text-align: right;
-            max-width: 60%;
-            word-break: break-all;
-        }
-
-        .stalk-description {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 5px;
-        }
-
-        .stalk-description-title {
-            color: #888;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stalk-description-text {
-            color: #d0d0d0;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-            opacity: 0;
-            animation: fadeStagger 0.8s ease 0.3s forwards;
-        }
-
-        @media (max-width: 600px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        }
-
-        .gallery-grid::-webkit-scrollbar { width: 4px; }
-        .gallery-grid::-webkit-scrollbar-thumb { background: #ff4500; border-radius: 10px; }
-        .gallery-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
 
         .gallery-item {
-            aspect-ratio: 1 / 1;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0;
-            animation: galleryItem 0.6s ease forwards;
-            cursor: pointer;
-            position: relative;
+            aspect-ratio: 1/1; border-radius: 16px; overflow: hidden;
+            background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.2,0.8,0.2,1); cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); position: relative;
         }
+        .gallery-item:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(255,255,255,0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.1); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: all 0.6s ease; filter: blur(20px); transform: scale(1.1); opacity: 0.8; }
+        .gallery-item img.loaded { filter: blur(0); transform: scale(1); opacity: 1; }
 
-        .gallery-item:nth-child(1) { animation-delay: 0.2s; }
-        .gallery-item:nth-child(2) { animation-delay: 0.3s; }
-        .gallery-item:nth-child(3) { animation-delay: 0.4s; }
-        .gallery-item:nth-child(4) { animation-delay: 0.5s; }
-        .gallery-item:nth-child(5) { animation-delay: 0.6s; }
-        .gallery-item:nth-child(6) { animation-delay: 0.7s; }
-
-        @keyframes galleryItem {
-            0% { opacity: 0; transform: scale(0.85) rotate(5deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0); }
+        .gallery-item-info {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px 10px 8px; opacity: 0; transition: opacity 0.3s;
         }
+        .gallery-item:hover .gallery-item-info { opacity: 1; }
+        .gallery-item-name { font-size: 0.65rem; color: rgba(255,255,255,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .gallery-item-by { font-size: 0.6rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.8s ease;
-            filter: blur(70px);
-            transform: scale(1.1);
-        }
-
-        .gallery-item img.loaded { filter: blur(0); transform: scale(1); }
-        .gallery-item:hover img.loaded { transform: scale(1.08); }
-
+        /* LIGHTBOX */
         .lightbox-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            animation: lightboxOpen 0.4s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(25px);
+            z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px;
         }
-
-        .lightbox-overlay.active { display: flex; }
-
-        @keyframes lightboxOpen {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
+        .lightbox-overlay.active { display: flex; animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { 0% { opacity:0; } 100% { opacity:1; } }
 
         .lightbox-content {
-            max-width: 95%;
-            max-height: 90vh;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.9);
-            border: 1px solid rgba(255,255,255,0.1);
-            animation: lightboxZoom 0.4s ease;
-            background: #000;
+            max-width: 90%; max-height: 85vh; border-radius: 24px; overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.05); padding: 10px;
+            animation: lightboxZoom 0.5s cubic-bezier(0.2,0.8,0.2,1);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
         }
+        @keyframes lightboxZoom { 0% { opacity:0; transform:scale(0.9) translateY(20px); } 100% { opacity:1; transform:scale(1) translateY(0); } }
+        .lightbox-content img { width: 100%; height: auto; max-height: 72vh; display: block; object-fit: contain; border-radius: 16px; }
 
-        @keyframes lightboxZoom {
-            0% { opacity: 0; transform: scale(0.8) rotate(3deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0); }
+        .lightbox-meta {
+            text-align: center; padding: 4px 10px 6px;
+            font-size: 0.72rem; color: rgba(255,255,255,0.5); line-height: 1.6;
         }
-
-        .lightbox-content img {
-            width: 100%;
-            height: auto;
-            max-height: 90vh;
-            display: block;
-            object-fit: contain;
-            filter: blur(0) !important;
-            transform: scale(1) !important;
-        }
+        .lightbox-meta strong { color: rgba(255,255,255,0.85); font-size: 0.82rem; display: block; }
 
         .lightbox-close {
-            position: fixed;
-            top: 20px;
-            right: 25px;
-            color: #fff;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 10000;
-            transition: 0.3s;
-            background: rgba(0,0,0,0.6);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            position: fixed; top: 30px; right: 30px; color: #fff; font-size: 1.5rem; cursor: pointer;
+            z-index: 10000; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;
         }
+        .lightbox-close:hover { background: rgba(255,69,0,0.8); transform: rotate(90deg) scale(1.1); }
 
-        .lightbox-close:hover { transform: rotate(90deg); background: rgba(255,69,0,0.3); border-color: #ff4500; }
-
-        @media (max-width: 768px) {
-            .app-container { padding: 20px; }
-            .home-wrapper { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .app-container { padding: 30px 20px; border-radius: 24px; }
+            .home-wrapper { grid-template-columns: 1fr; gap: 30px; text-align: center; }
             .hero-left { text-align: center; order: 2; }
-            .hero-left h1 { font-size: 2.5rem; }
-            .hero-left p { margin: 0 auto 25px auto; max-width: 100%; }
-            .hero-right { order: 1; gap: 10px; }
-            .roblox-mega { width: 80px; height: 80px; }
-            header { flex-direction: column; align-items: stretch; }
-            nav { justify-content: center; border-radius: 20px; }
-            .nav-btn { padding: 8px 16px; font-size: 0.8rem; }
-            .lightbox-content { max-width: 98%; max-height: 85vh; }
-            .lightbox-close { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 1.5rem; }
-            .about-desc { max-height: 200px; }
-            .stalk-profile { flex-direction: column; align-items: center; }
-            .stalk-avatar { width: 100px; height: 100px; }
-            .stalk-info-item { flex-direction: column; align-items: flex-start; gap: 4px; }
-            .stalk-value { text-align: left; max-width: 100%; }
-            .stalk-search-area { flex-direction: column; }
-            .stalk-search-area input { width: 100%; }
-            .stalk-search-btn { width: 100%; justify-content: center; }
+            .hero-left h1 { font-size: 3rem; }
+            .hero-left p { margin: 0 auto 30px auto; max-width: 100%; }
+            .hero-right { order: 1; }
+            .roblox-mega { width: 150px; height: 150px; }
+            header { flex-direction: column; gap: 20px; }
+            nav { width: 100%; justify-content: center; }
+            .nav-btn { flex: 1; padding: 10px; font-size: 0.85rem; text-align: center; }
+        }
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
     <div class="animated-bg"></div>
+    <div class="glass-orb orb-1"></div>
+    <div class="glass-orb orb-2"></div>
+    <div class="glass-orb orb-3"></div>
     <canvas id="particles-canvas"></canvas>
 
     <div class="app-container">
@@ -657,47 +264,43 @@
             <nav>
                 <button class="nav-btn active" data-tab="home">Home</button>
                 <button class="nav-btn" data-tab="about">About</button>
-                <button class="nav-btn" data-tab="stalk">Stalk</button>
                 <button class="nav-btn" data-tab="gallery">Gallery</button>
             </nav>
         </header>
 
+        <!-- HOME -->
         <div id="home" class="tab-content active">
             <div class="home-wrapper">
                 <div class="hero-left">
                     <h1>Bocil <span>Rosblok</span></h1>
-                    <p>Komunitas Roblox terbaik untuk bermain, bersosialisasi, dan berkreasi bersama.</p>
-                    <button class="btn-utama" onclick="window.open('https://discord.gg/your-invite', '_blank')">
+                    <p>Komunitas Roblox terbaik untuk bermain, bersosialisasi, dan berkreasi bersama dengan nuansa yang berbeda.</p>
+                    <button class="btn-utama" onclick="window.open('https://discord.gg/gbHUAtyUv3','_blank')">
                         <i class="fa-brands fa-discord"></i> Gabung Discord
                     </button>
                 </div>
                 <div class="hero-right">
                     <img src="https://cdn.simpleicons.org/roblox/white" alt="Roblox Logo" class="roblox-mega">
-                    <i class="fa-solid fa-gamepad float-icon"></i>
-                    <i class="fa-solid fa-users float-icon"></i>
                 </div>
             </div>
         </div>
 
+        <!-- ABOUT -->
         <div id="about" class="tab-content">
             <div class="about-card">
                 <div class="about-title">
                     <i class="fa-solid fa-people-group"></i> Tentang Boros
                 </div>
                 <div class="about-desc">
-                    <strong>Boros</strong> adalah singkatan dari "Bocil Rosblok" — sebuah komunitas kecil yang baru saja lahir dari kecintaan terhadap game Roblox. 
-                    Kami adalah tempat berkumpulnya para pemain Roblox dari berbagai kalangan, terutama anak-anak muda yang ingin bermain, 
-                    belajar, dan bersosialisasi dalam lingkungan yang positif dan menyenangkan.
+                    <strong>Boros</strong> adalah singkatan dari "Bocil Rosblok" — sebuah komunitas kecil yang baru saja lahir dari kecintaan terhadap game Roblox.
+                    Kami adalah tempat berkumpulnya para pemain Roblox dari berbagai kalangan, terutama anak-anak muda yang ingin bermain, belajar, dan bersosialisasi dalam lingkungan yang positif dan menyenangkan.
                     <br><br>
-                    Meskipun masih tergolong komunitas baru, kami memiliki semangat yang besar untuk tumbuh dan berkembang bersama. 
-                    Di sini, setiap anggota memiliki kesempatan yang sama untuk berkontribusi, berbagi tips dan trick seputar Roblox, 
-                    serta membangun persahabatan baru di dunia maya.
+                    Meskipun masih tergolong komunitas baru, kami memiliki semangat yang besar untuk tumbuh dan berkembang bersama.
+                    Di sini, setiap anggota memiliki kesempatan yang sama untuk berkontribusi, berbagi tips dan trick seputar Roblox, serta membangun persahabatan baru di dunia maya.
                     <br><br>
-                    Visi kami adalah menciptakan tempat yang aman dan nyaman bagi semua anggota, di mana setiap orang bisa menjadi diri sendiri 
-                    tanpa takut dihakimi. Kami percaya bahwa bermain game bukan hanya tentang memenangkan pertandingan, tetapi juga tentang 
-                    menciptakan kenangan indah bersama teman-teman baru.
+                    Visi kami adalah menciptakan tempat yang aman dan nyaman bagi semua anggota, di mana setiap orang bisa menjadi diri sendiri tanpa takut dihakimi.
+                    Kami percaya bahwa bermain game bukan hanya tentang memenangkan pertandingan, tetapi juga tentang menciptakan kenangan indah bersama teman-teman baru.
                     <br><br>
-                    Jika kamu baru memulai di Roblox atau sudah menjadi veteran, <strong>Boros</strong> menyambutmu dengan tangan terbuka. 
+                    Jika kamu baru memulai di Roblox atau sudah menjadi veteran, <strong>Boros</strong> menyambutmu dengan tangan terbuka.
                     Mari bersama-sama kita jelajahi dunia Roblox, buat mabar (main bareng), dan ciptakan cerita seru yang akan kita kenang selamanya.
                     <br><br>
                     <em>"Jangan malu untuk bergabung, karena setiap perjalanan dimulai dari langkah pertama. Mabar yuk!"</em>
@@ -705,117 +308,62 @@
             </div>
         </div>
 
-        <div id="stalk" class="tab-content">
-            <div class="stalk-container">
-                <div class="stalk-search-area">
-                    <input type="text" id="stalkUsername" placeholder="Masukkan username Roblox..." autocomplete="off">
-                    <button class="stalk-search-btn" onclick="stalkRoblox()">
-                        <i class="fa-solid fa-magnifying-glass"></i> Stalk
-                    </button>
-                </div>
-                <div class="stalk-status" id="stalkStatus">Masukkan username untuk mencari informasi</div>
-
-                <div class="stalk-result" id="stalkResult">
-                    <div class="stalk-profile">
-                        <div class="stalk-avatar">
-                            <img id="stalkAvatar" src="" alt="Avatar">
-                        </div>
-                        <div class="stalk-info">
-                            <div class="stalk-info-item">
-                                <span class="stalk-label">Display Name</span>
-                                <span class="stalk-value" id="stalkDisplayName">-</span>
-                            </div>
-                            <div class="stalk-info-item">
-                                <span class="stalk-label">Username</span>
-                                <span class="stalk-value" id="stalkUsernameValue">-</span>
-                            </div>
-                            <div class="stalk-info-item">
-                                <span class="stalk-label">User ID</span>
-                                <span class="stalk-value" id="stalkUserId">-</span>
-                            </div>
-                            <div class="stalk-info-item">
-                                <span class="stalk-label">Created</span>
-                                <span class="stalk-value" id="stalkCreated">-</span>
-                            </div>
-                            <div class="stalk-info-item">
-                                <span class="stalk-label">Last Online</span>
-                                <span class="stalk-value" id="stalkLastOnline">-</span>
-                            </div>
-                            <div class="stalk-info-item">
-                                <span class="stalk-label">Verified Badge</span>
-                                <span class="stalk-value" id="stalkVerified">-</span>
-                            </div>
-                            <div class="stalk-info-item">
-                                <span class="stalk-label">Banned</span>
-                                <span class="stalk-value" id="stalkBanned">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stalk-description">
-                        <div class="stalk-description-title">Description</div>
-                        <div class="stalk-description-text" id="stalkDescription">-</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <!-- GALLERY -->
         <div id="gallery" class="tab-content">
+            <div class="gallery-header">
+                <div class="gallery-title">📸 Galeri Komunitas</div>
+                <div class="gallery-count">Total: <span id="totalCount">—</span> foto</div>
+            </div>
             <div class="gallery-grid" id="galleryGrid">
-                <div style="color:#b0b0b0; grid-column:1/-1; text-align:center; padding:20px;">
-                    <i class="fa-solid fa-spinner fa-spin"></i> Memuat...
+                <div style="color:rgba(255,255,255,0.5); grid-column:1/-1; text-align:center; padding:40px;">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size:2rem; margin-bottom:10px; display:block;"></i>
+                    Memuat Galeri...
                 </div>
             </div>
         </div>
-
     </div>
 
+    <!-- LIGHTBOX -->
     <div class="lightbox-overlay" id="lightbox">
-        <div class="lightbox-close" id="lightboxClose">
-            <i class="fa-solid fa-xmark"></i>
-        </div>
+        <div class="lightbox-close" id="lightboxClose"><i class="fa-solid fa-xmark"></i></div>
         <div class="lightbox-content">
-            <img id="lightboxImage" src="" alt="Full Size Image">
+            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-meta">
+                <strong id="lbName"></strong>
+                <span id="lbBy"></span>
+            </div>
         </div>
     </div>
 
     <script>
-        // --- PARTICLES ---
+        // ── PARTICLES ──────────────────────────────────────────────────
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
         class Particle {
-            constructor() {
+            constructor() { this.reset(); }
+            reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
                 this.opacity = Math.random() * 0.3 + 0.1;
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+                this.x += this.speedX; this.y += this.speedY;
                 if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
             draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
-
-        for (let i = 0; i < 80; i++) particles.push(new Particle());
-
+        const particles = Array.from({ length: 40 }, () => new Particle());
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
@@ -823,159 +371,126 @@
         }
         animateParticles();
 
-        // --- TAB SYSTEM ---
-        const navBtns = document.querySelectorAll('.nav-btn');
-        const contents = document.querySelectorAll('.tab-content');
-
-        navBtns.forEach(btn => {
+        // ── TAB SYSTEM ─────────────────────────────────────────────────
+        document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                navBtns.forEach(b => b.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 btn.classList.add('active');
-                const targetId = btn.dataset.tab;
-                const targetContent = document.getElementById(targetId);
-                targetContent.classList.add('active');
-                targetContent.style.animation = 'none';
-                targetContent.offsetHeight;
-                targetContent.style.animation = 'tabTransition 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                const target = document.getElementById(btn.dataset.tab);
+                void target.offsetWidth;
+                target.classList.add('active');
             });
         });
 
-        // --- STALK ROBLOX (Tanpa Proxy, Langsung ke API) ---
-        async function stalkRoblox() {
-            const username = document.getElementById('stalkUsername').value.trim();
-            const statusEl = document.getElementById('stalkStatus');
-            const resultEl = document.getElementById('stalkResult');
-            
-            if (!username) {
-                statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:#ff6b6b;"></i> Masukkan username!';
-                resultEl.classList.remove('active');
-                return;
-            }
-
-            statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mencari...';
-            resultEl.classList.remove('active');
-
-            try {
-                // Langsung fetch ke API (di Github Pages ini akan bekerja)
-                const response = await fetch(`https://api.ootaizumi.web.id/stalk/roblox?username=${encodeURIComponent(username)}`, {
-                    method: 'GET',
-                    headers: { 
-                        'accept': '*/*'
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
-                }
-
-                const data = await response.json();
-                
-                if (!data.status || !data.result || !data.result.result) {
-                    throw new Error('Username tidak ditemukan');
-                }
-
-                const user = data.result.result;
-                const details = data.result;
-
-                // Update avatar
-                const avatarUrl = details.profileDetails || 'https://tr.rbxcdn.com/30DAY-Avatar-60DFEE906C236DA9BF86BC0472B1111D-Png/720/720/Avatar/Png/noFilter';
-                document.getElementById('stalkAvatar').src = avatarUrl;
-                document.getElementById('stalkAvatar').onerror = function() {
-                    this.src = 'https://tr.rbxcdn.com/30DAY-Avatar-60DFEE906C236DA9BF86BC0472B1111D-Png/720/720/Avatar/Png/noFilter';
-                };
-
-                // Update info
-                document.getElementById('stalkDisplayName').textContent = user.displayName || '-';
-                document.getElementById('stalkUsernameValue').textContent = user.name || '-';
-                document.getElementById('stalkUserId').textContent = user.id || '-';
-                document.getElementById('stalkCreated').textContent = user.created ? new Date(user.created).toLocaleString() : '-';
-                document.getElementById('stalkLastOnline').textContent = details.lastOnline || 'N/A';
-                document.getElementById('stalkVerified').textContent = user.hasVerifiedBadge ? 'Yes' : 'No';
-                document.getElementById('stalkBanned').textContent = user.isBanned ? 'Yes' : 'No';
-                document.getElementById('stalkDescription').textContent = user.description || 'No description';
-
-                statusEl.innerHTML = '<i class="fa-solid fa-check-circle" style="color:#57F287;"></i> Berhasil!';
-                resultEl.classList.add('active');
-
-            } catch (error) {
-                console.error('Stalk Error:', error);
-                statusEl.innerHTML = `<i class="fa-solid fa-circle-xmark" style="color:#ff6b6b;"></i> ${error.message || 'Terjadi kesalahan'}`;
-                resultEl.classList.remove('active');
-            }
-        }
-
-        document.getElementById('stalkUsername').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                stalkRoblox();
-            }
-        });
-
-        // --- GALLERY LOADER ---
+        // ── GALLERY LOADER ─────────────────────────────────────────────
+        // Membaca img.json yang dihasilkan otomatis oleh GitHub Actions
+        // Format img.json: { "images": [ { "filename", "url", "uploaded_by", "timestamp", ... } ] }
         const grid = document.getElementById('galleryGrid');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImage');
-        const lightboxClose = document.getElementById('lightboxClose');
+        const lbName = document.getElementById('lbName');
+        const lbBy = document.getElementById('lbBy');
+        const totalCount = document.getElementById('totalCount');
 
         async function loadGallery() {
             try {
-                const res = await fetch('img.json');
-                if (!res.ok) throw new Error('File not found');
-                const imgs = await res.json();
+                const res = await fetch(`img.json?t=${Date.now()}`);
+                if (!res.ok) throw new Error('img.json tidak ditemukan');
+                const data = await res.json();
+
+                // Support 2 format: array of URLs (lama) atau object {images:[...]} (baru)
+                let images = [];
+                if (Array.isArray(data)) {
+                    // Format lama: ["url1","url2",...]
+                    images = data.map(url => ({ url, filename: url.split('/').pop(), uploaded_by: null, timestamp: null }));
+                } else if (data.images) {
+                    // Format baru dari sistem GitHub Actions
+                    images = data.images;
+                }
+
+                totalCount.textContent = images.length;
+
+                if (images.length === 0) {
+                    grid.innerHTML = `
+                        <div style="color:rgba(255,255,255,0.4); grid-column:1/-1; text-align:center; padding:50px;">
+                            <i class="fa-regular fa-image" style="font-size:3rem; margin-bottom:15px; display:block; opacity:0.3;"></i>
+                            Belum ada foto.<br>
+                            <span style="font-size:0.85rem;">Upload gambar di Discord untuk memulai!</span>
+                        </div>`;
+                    return;
+                }
+
+                // Urutkan terbaru dulu
+                images.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+
                 grid.innerHTML = '';
-                imgs.forEach((url, index) => {
+                images.forEach((img, idx) => {
+                    const imgUrl = img.url || img;
+                    const name = img.original_filename || img.filename || `foto-${idx+1}`;
+                    const by = img.uploaded_by ? img.uploaded_by.split('#')[0] : null;
+                    const date = img.timestamp
+                        ? new Date(img.timestamp).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' })
+                        : null;
+
                     const div = document.createElement('div');
                     div.className = 'gallery-item';
-                    div.style.animationDelay = `${0.2 + (index * 0.1)}s`;
-                    
-                    const img = document.createElement('img');
-                    img.src = url;
-                    img.loading = 'lazy';
-                    img.alt = `Gallery ${index + 1}`;
-                    
-                    img.onload = function() {
-                        this.classList.add('loaded');
-                    };
-                    
+                    div.style.animationDelay = `${idx * 0.04}s`;
+
+                    const image = document.createElement('img');
+                    image.src = imgUrl;
+                    image.loading = 'lazy';
+                    image.alt = name;
+                    image.onload = function() { this.classList.add('loaded'); };
+                    image.onerror = function() { div.style.display = 'none'; };
+
+                    const info = document.createElement('div');
+                    info.className = 'gallery-item-info';
+                    info.innerHTML = `
+                        <div class="gallery-item-name">${name}</div>
+                        ${by ? `<div class="gallery-item-by">oleh ${by}${date ? ' · ' + date : ''}</div>` : ''}
+                    `;
+
                     div.addEventListener('click', () => {
-                        lightboxImg.src = url;
+                        lightboxImg.src = imgUrl;
+                        lightboxImg.alt = name;
+                        lbName.textContent = name;
+                        lbBy.textContent = by ? `oleh ${by}${date ? ' · ' + date : ''}` : '';
                         lightbox.classList.add('active');
                         document.body.style.overflow = 'hidden';
                     });
-                    
-                    div.appendChild(img);
+
+                    div.appendChild(image);
+                    div.appendChild(info);
                     grid.appendChild(div);
                 });
-            } catch {
+
+            } catch (e) {
                 grid.innerHTML = `
-                    <div style="color:#ff6b6b; grid-column:1/-1; text-align:center; padding:20px; background:rgba(255,0,0,0.05); border-radius:15px;">
-                        <i class="fa-solid fa-triangle-exclamation"></i> Gagal memuat gambar.<br>
-                        <span style="font-size:0.8rem; color:#888;">Pastikan file img.json ada.</span>
-                    </div>
-                `;
+                    <div style="color:#ff6b6b; grid-column:1/-1; text-align:center; padding:30px;
+                        background:rgba(255,69,0,0.1); border:1px solid rgba(255,69,0,0.2);
+                        border-radius:20px; backdrop-filter:blur(5px);">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size:2rem; margin-bottom:10px; display:block;"></i>
+                        Gagal memuat gambar.<br>
+                        <span style="font-size:0.8rem; color:rgba(255,255,255,0.5);">${e.message}</span>
+                    </div>`;
             }
         }
-        loadGallery();
 
-        // --- LIGHTBOX CONTROLS ---
+        loadGallery();
+        // Auto-refresh setiap 5 menit (sama dengan interval GitHub Actions)
+        setInterval(loadGallery, 5 * 60 * 1000);
+
+        // ── LIGHTBOX ───────────────────────────────────────────────────
         function closeLightbox() {
             lightbox.classList.remove('active');
             document.body.style.overflow = 'auto';
+            lightboxImg.src = '';
         }
 
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     </script>
-
 </body>
 </html>
