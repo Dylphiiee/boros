@@ -1,5 +1,14 @@
 {
-  "images": [],
-  "last_updated": null,
-  "total_count": 0
+  "images": [
+    {
+      "filename": "file_0000000038d87208a0c524cffb5d5c66.png",
+      "original_filename": "file_0000000038d87208a0c524cffb5d5c66.png",
+      "uploaded_by": "ziyyx",
+      "timestamp": "2026-05-05T00:10:19.734000+00:00",
+      "url": "images/file_0000000038d87208a0c524cffb5d5c66.png",
+      "hash": "9d890581ff04667ffaecf9b6515795d7"
+    }
+  ],
+  "last_updated": "2026-05-05T00:11:33.989181",
+  "total_count": 1
 }
