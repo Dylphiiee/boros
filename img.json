@@ -1,22 +1,5 @@
 {
-  "images": [
-    {
-      "filename": "10371804709_7041939546_1777822215338.png",
-      "original_filename": "10371804709_7041939546_1777822215338.png",
-      "uploaded_by": "dylphiiee.",
-      "timestamp": "2026-05-04T19:54:02.196000+00:00",
-      "url": "images/10371804709_7041939546_1777822215338.png",
-      "hash": "6ba2556a733cdc526cfb104ca003fff9"
-    },
-    {
-      "filename": "10371804709_7041939546_1777822184088.png",
-      "original_filename": "10371804709_7041939546_1777822184088.png",
-      "uploaded_by": "dylphiiee.",
-      "timestamp": "2026-05-04T19:40:32.542000+00:00",
-      "url": "images/10371804709_7041939546_1777822184088.png",
-      "hash": "c524e7c43fadf39d42665ab73ba55ef2"
-    }
-  ],
-  "last_updated": "2026-05-04T20:09:50.941270",
-  "total_count": 2
+  "images": [],
+  "last_updated": null,
+  "total_count": 0
 }
