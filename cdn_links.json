@@ -322,5 +322,77 @@
     "processed": true,
     "scanned_at": "2026-05-07T04:04:10.019220+00:00",
     "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1500936677722685632/1501547094836645978/IMG_20260420_113340_349.jpg?ex=69fdc9b4&is=69fc7834&hm=977a88a2a93165f8389e06a9e9277d624709a1c10e72cbbf639373fcf9dcbdc5&",
+    "filename": "IMG_20260420_113340_349.jpg",
+    "uploaded_by": "ziyyx",
+    "author_id": "1261304085554921503",
+    "timestamp": "2026-05-06T11:32:04.868000+00:00",
+    "message_id": "1501547095100756049",
+    "channel_id": "1500936677722685632",
+    "processed": true,
+    "scanned_at": "2026-05-07T13:18:32.009368+00:00",
+    "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1500936677722685632/1501030089419391128/file_00000000050472089c0e230c1cfea563.png?ex=69fde275&is=69fc90f5&hm=4bcb4f60ca0a9771e1af3c74d7fe512e6fb95784bea38c151e13b37a0dbd49a3&",
+    "filename": "file_00000000050472089c0e230c1cfea563.png",
+    "uploaded_by": "dylphiiee.",
+    "author_id": "1447777568827904084",
+    "timestamp": "2026-05-05T01:17:41.176000+00:00",
+    "message_id": "1501030089704341596",
+    "channel_id": "1500936677722685632",
+    "processed": true,
+    "scanned_at": "2026-05-07T13:18:32.009428+00:00",
+    "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1500936677722685632/1501022156786630778/file_0000000093fc7208b00d72d608b9bf2d.png?ex=69fddb11&is=69fc8991&hm=0d25a78bc407ce2be4f0e58285d94925e3f3f4402d588c1d09ef7fdfe023f0ac&",
+    "filename": "file_0000000093fc7208b00d72d608b9bf2d.png",
+    "uploaded_by": "dylphiiee.",
+    "author_id": "1447777568827904084",
+    "timestamp": "2026-05-05T00:46:09.908000+00:00",
+    "message_id": "1501022157151404174",
+    "channel_id": "1500936677722685632",
+    "processed": true,
+    "scanned_at": "2026-05-07T13:18:32.009472+00:00",
+    "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1500936677722685632/1501015449096290324/IMG-20260419-WA0017.jpg?ex=69fdd4d2&is=69fc8352&hm=f6edfdd95026d4d8c90e97800be529cb0263bcf8f70328bdf28349b04bcfc031&",
+    "filename": "IMG-20260419-WA0017.jpg",
+    "uploaded_by": "ziyyx",
+    "author_id": "1261304085554921503",
+    "timestamp": "2026-05-05T00:19:30.640000+00:00",
+    "message_id": "1501015449335496814",
+    "channel_id": "1500936677722685632",
+    "processed": true,
+    "scanned_at": "2026-05-07T13:18:32.009509+00:00",
+    "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1500936677722685632/1501015162801619035/file_00000000896c71fa9caf95f9acab515d.png?ex=69fdd48e&is=69fc830e&hm=683640c389650310210c84bff53daa3d2688d4611c4e4e5278b681b5328a1848&",
+    "filename": "file_00000000896c71fa9caf95f9acab515d.png",
+    "uploaded_by": "dylphiiee.",
+    "author_id": "1447777568827904084",
+    "timestamp": "2026-05-05T00:18:22.345000+00:00",
+    "message_id": "1501015162885243023",
+    "channel_id": "1500936677722685632",
+    "processed": true,
+    "scanned_at": "2026-05-07T13:18:32.009544+00:00",
+    "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1500936677722685632/1501013138386976908/file_0000000038d87208a0c524cffb5d5c66.png?ex=69fdd2ab&is=69fc812b&hm=4e39752844761cb95e54947c90de06dc3b17aa4e646693f502f6f9fcd2594a01&",
+    "filename": "file_0000000038d87208a0c524cffb5d5c66.png",
+    "uploaded_by": "ziyyx",
+    "author_id": "1261304085554921503",
+    "timestamp": "2026-05-05T00:10:19.734000+00:00",
+    "message_id": "1501013138667999333",
+    "channel_id": "1500936677722685632",
+    "processed": true,
+    "scanned_at": "2026-05-07T13:18:32.009579+00:00",
+    "skip_reason": "duplicate"
   }
 ]
