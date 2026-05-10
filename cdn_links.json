@@ -694,5 +694,17 @@
     "processed": true,
     "scanned_at": "2026-05-09T19:23:41.540513+00:00",
     "saved_as": "8221766513_131312206945521_1778353306676.png"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1500936677722685632/1501547094836645978/IMG_20260420_113340_349.jpg?ex=6a011574&is=69ffc3f4&hm=e9545bf78c88b3cef41d2b00ac8cd8bd44a1f9a8ead9e9d6eac062993b943f5e&",
+    "filename": "IMG_20260420_113340_349.jpg",
+    "uploaded_by": "ziyyx",
+    "author_id": "1261304085554921503",
+    "timestamp": "2026-05-06T11:32:04.868000+00:00",
+    "message_id": "1501547095100756049",
+    "channel_id": "1500936677722685632",
+    "processed": true,
+    "scanned_at": "2026-05-10T00:04:03.438605+00:00",
+    "skip_reason": "duplicate"
   }
 ]
