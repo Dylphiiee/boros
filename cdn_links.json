@@ -65434,5 +65434,29 @@
     "processed": true,
     "scanned_at": "2026-06-27T22:40:45.151764+00:00",
     "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1493263197157720287/1504097200391716965/ffa36aba-25c4-411c-a5f0-d770818748de.png?ex=6a41bb6d&is=6a4069ed&hm=7b6fb623caeb37a076e519038dcd2870a6757ce0f0391bad38a94fae8ea2db03&",
+    "filename": "ffa36aba-25c4-411c-a5f0-d770818748de.png",
+    "uploaded_by": "ziyyx",
+    "author_id": "1261304085554921503",
+    "timestamp": "2026-05-13T12:25:17.306000+00:00",
+    "message_id": "1504097200215429190",
+    "channel_id": "1493263197157720287",
+    "processed": true,
+    "scanned_at": "2026-06-28T01:55:31.166034+00:00",
+    "skip_reason": "duplicate"
+  },
+  {
+    "url": "https://cdn.discordapp.com/attachments/1493263197157720287/1504097200815210707/ed335b45-72ae-4420-8c4e-37664ded83ba.png?ex=6a41bb6d&is=6a4069ed&hm=e271a5a0634c6a10f0d9bc570949b8345fafbe6951ba5f7d7b8c672edc262e9d&",
+    "filename": "ed335b45-72ae-4420-8c4e-37664ded83ba.png",
+    "uploaded_by": "ziyyx",
+    "author_id": "1261304085554921503",
+    "timestamp": "2026-05-13T12:25:17.306000+00:00",
+    "message_id": "1504097200215429190",
+    "channel_id": "1493263197157720287",
+    "processed": true,
+    "scanned_at": "2026-06-28T01:55:31.166062+00:00",
+    "skip_reason": "duplicate"
   }
 ]
